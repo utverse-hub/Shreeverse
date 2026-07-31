@@ -51,14 +51,17 @@
 
         <div class="intro-container">
 
-            <h2 id="introText"></h2>
+            <h2 id="introText" aria-live="polite"></h2>
 
             <div id="keyContainer">
 
                 <img
                     src="assets/images/keys/royal-key.png"
                     id="key"
-                    alt="Royal Key">
+                    alt="Royal Key"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Unlock your journey">
 
                 <p>Click to Unlock</p>
 
@@ -88,9 +91,259 @@
                 </p>
 
                 <button id="beginJourney">
-                    Begin Your Journey
+                    Continue
                 </button>
 
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- ROYAL LETTER -->
+        <!-- ========================= -->
+
+        <section id="letterScreen" aria-hidden="true">
+
+            <div class="letter-rays" aria-hidden="true"></div>
+
+            <div class="letter-particles" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="letter-scene">
+
+                <p class="letter-kicker">A Letter Just For You</p>
+
+                <div class="letter-assembly" id="letterAssembly">
+
+                    <div class="royal-bloom" aria-hidden="true"></div>
+
+                    <img
+                        src="assets/images/letters/paper-letter.png"
+                        id="letterPaper"
+                        alt="An unfolded letter">
+
+                    <div id="letterContent" aria-live="polite">
+                        <p id="typedLetter"></p><span class="typing-cursor" aria-hidden="true">|</span>
+                        <p id="letterSignature">With all my love,<br>❤️</p>
+                        <button id="letterContinue" type="button">Continue</button>
+                    </div>
+
+                    <button id="envelopeTrigger" type="button" aria-label="Open the royal letter" aria-describedby="envelopeHint">
+                        <img
+                            src="assets/images/letters/envelope.png"
+                            id="envelope"
+                            alt="Royal envelope">
+                    </button>
+
+                    <img
+                        src="assets/images/letters/wax-seal.png"
+                        id="waxSeal"
+                        alt=""
+                        aria-hidden="true">
+
+                </div>
+
+                <p id="envelopeHint">Click the envelope to open your letter</p>
+
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- OUR STORY -->
+        <!-- ========================= -->
+
+        <section id="storyPlaceholder" aria-hidden="true">
+
+            <div class="story-placeholder-content">
+                <h2 id="storyPlaceholderTitle" tabindex="-1">Our Story</h2>
+
+                <div class="story-timeline" aria-label="Our Story timeline">
+
+                    <button class="timeline-card" type="button">
+                        <span class="timeline-marker" aria-hidden="true"></span>
+                        <span>First Meeting</span>
+                    </button>
+
+                    <button class="timeline-card" type="button">
+                        <span class="timeline-marker" aria-hidden="true"></span>
+                        <span>First Conversation</span>
+                    </button>
+
+                    <button class="timeline-card" type="button">
+                        <span class="timeline-marker" aria-hidden="true"></span>
+                        <span>First Smile</span>
+                    </button>
+
+                    <button class="timeline-card" type="button">
+                        <span class="timeline-marker" aria-hidden="true"></span>
+                        <span>First Call</span>
+                    </button>
+
+                    <button class="timeline-card" type="button">
+                        <span class="timeline-marker" aria-hidden="true"></span>
+                        <span>First "I Love You"</span>
+                    </button>
+
+                </div>
+
+                <button id="storyContinue" type="button" aria-label="Continue to Our Memories">Continue <span aria-hidden="true">→</span></button>
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- OUR MEMORIES -->
+        <!-- ========================= -->
+
+        <section id="memoriesScreen" aria-hidden="true">
+
+            <div class="memories-content">
+                <h2 id="memoriesTitle" tabindex="-1">Our Memories</h2>
+                <p class="memories-subtitle">Every memory with you is my favorite.</p>
+
+                <div class="memory-carousel" aria-roledescription="carousel" aria-label="Our Memories">
+                    <button id="memoryPrevious" class="memory-arrow" type="button" aria-label="Previous memory">←</button>
+
+                    <div id="memoryViewport" class="memory-viewport" aria-live="polite">
+
+                        <article class="memory-card is-active" aria-label="Memory 1 of 6">
+                            <div class="memory-image memory-image-one" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
+                            <div class="memory-details"><time datetime="2026-01-01">Placeholder Date</time><h3>First Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                        </article>
+
+                        <article class="memory-card" aria-label="Memory 2 of 6">
+                            <div class="memory-image memory-image-two" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
+                            <div class="memory-details"><time datetime="2026-01-02">Placeholder Date</time><h3>Second Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                        </article>
+
+                        <article class="memory-card" aria-label="Memory 3 of 6">
+                            <div class="memory-image memory-image-three" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
+                            <div class="memory-details"><time datetime="2026-01-03">Placeholder Date</time><h3>Third Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                        </article>
+
+                        <article class="memory-card" aria-label="Memory 4 of 6">
+                            <div class="memory-image memory-image-four" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
+                            <div class="memory-details"><time datetime="2026-01-04">Placeholder Date</time><h3>Fourth Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                        </article>
+
+                        <article class="memory-card" aria-label="Memory 5 of 6">
+                            <div class="memory-image memory-image-five" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
+                            <div class="memory-details"><time datetime="2026-01-05">Placeholder Date</time><h3>Fifth Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                        </article>
+
+                        <article class="memory-card" aria-label="Memory 6 of 6">
+                            <div class="memory-image memory-image-six" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
+                            <div class="memory-details"><time datetime="2026-01-06">Placeholder Date</time><h3>Sixth Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                        </article>
+
+                    </div>
+
+                    <button id="memoryNext" class="memory-arrow" type="button" aria-label="Next memory">→</button>
+                </div>
+
+                <p id="memoryProgress" aria-live="polite">1 / 6</p>
+                <button id="memoryContinue" type="button" aria-label="Continue to the next chapter">Continue <span aria-hidden="true">→</span></button>
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- REASONS I LOVE YOU -->
+        <!-- ========================= -->
+
+        <section id="reasonsScreen" aria-hidden="true">
+
+            <div class="reasons-content">
+                <h2 id="reasonsTitle" tabindex="-1">Reasons I Love You ❤️</h2>
+                <p class="reasons-subtitle">Some things deserve to be said forever.</p>
+
+                <div class="reasons-carousel" aria-roledescription="carousel" aria-label="Reasons I Love You">
+                    <button id="reasonPrevious" class="reason-arrow" type="button" aria-label="Previous reason">←</button>
+                    <div id="reasonViewport" class="reason-viewport" aria-live="polite">
+                        <article class="reason-card is-active" aria-label="Reason 1 of 10"><span class="reason-number">01</span><h3>First Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 2 of 10"><span class="reason-number">02</span><h3>Second Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 3 of 10"><span class="reason-number">03</span><h3>Third Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 4 of 10"><span class="reason-number">04</span><h3>Fourth Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 5 of 10"><span class="reason-number">05</span><h3>Fifth Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 6 of 10"><span class="reason-number">06</span><h3>Sixth Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 7 of 10"><span class="reason-number">07</span><h3>Seventh Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 8 of 10"><span class="reason-number">08</span><h3>Eighth Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 9 of 10"><span class="reason-number">09</span><h3>Ninth Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card" aria-label="Reason 10 of 10"><span class="reason-number">10</span><h3>Tenth Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                    </div>
+                    <button id="reasonNext" class="reason-arrow" type="button" aria-label="Next reason">→</button>
+                </div>
+
+                <p id="reasonProgress" aria-live="polite">1 / 10</p>
+                <button id="reasonContinue" type="button" aria-label="Continue to Our Promises">Continue <span aria-hidden="true">→</span></button>
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- OUR PROMISES -->
+        <!-- ========================= -->
+
+        <section id="promisesScreen" aria-hidden="true">
+
+            <div class="promises-content">
+                <h2 id="promisesTitle" tabindex="-1">Our Promises 🤍</h2>
+                <p class="promises-subtitle">Not just words... promises for every tomorrow.</p>
+
+                <div class="promise-carousel" aria-roledescription="carousel" aria-label="Our Promises">
+                    <button id="promisePrevious" class="promise-arrow" type="button" aria-label="Previous promise">←</button>
+
+                    <div id="promiseViewport" class="promise-viewport" aria-live="polite">
+
+                        <article class="promise-card is-active" aria-label="Promise 1 of 10"><span class="promise-number">01</span><h3>First Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 2 of 10"><span class="promise-number">02</span><h3>Second Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 3 of 10"><span class="promise-number">03</span><h3>Third Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 4 of 10"><span class="promise-number">04</span><h3>Fourth Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 5 of 10"><span class="promise-number">05</span><h3>Fifth Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 6 of 10"><span class="promise-number">06</span><h3>Sixth Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 7 of 10"><span class="promise-number">07</span><h3>Seventh Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 8 of 10"><span class="promise-number">08</span><h3>Eighth Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 9 of 10"><span class="promise-number">09</span><h3>Ninth Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card" aria-label="Promise 10 of 10"><span class="promise-number">10</span><h3>Tenth Promise</h3><p>A placeholder promise we will write together later.</p></article>
+
+                    </div>
+
+                    <button id="promiseNext" class="promise-arrow" type="button" aria-label="Next promise">→</button>
+                </div>
+
+                <p id="promiseProgress" aria-live="polite">1 / 10</p>
+                <button id="promiseContinue" type="button" aria-label="Continue to the final surprise">Continue <span aria-hidden="true">→</span></button>
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- FINAL SURPRISE -->
+        <!-- ========================= -->
+
+        <section id="finalSurpriseScreen" aria-hidden="true">
+
+            <div class="final-glow" aria-hidden="true"></div>
+
+            <div class="final-particles" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="final-surprise-content">
+                <div class="final-heart" aria-hidden="true">♥</div>
+                <h2 id="finalSurpriseTitle" tabindex="-1">❤️ Forever &amp; Always ❤️</h2>
+                <p class="final-surprise-subtitle">This is only the beginning of our forever.</p>
+                <p class="final-message">A placeholder final message for a beautiful ending we will write together later.</p>
+
+                <button id="lastSurpriseButton" type="button">One Last Surprise</button>
+
+                <section id="lastSurprisePanel" class="last-surprise-panel" aria-live="polite" aria-hidden="true">
+                    <p>A placeholder surprise message for the final page of our story.</p>
+                </section>
             </div>
 
         </section>

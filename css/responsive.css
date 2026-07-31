@@ -1,0 +1,309 @@
+/* ===========================
+   INTRO RESPONSIVENESS
+=========================== */
+
+@media (max-width: 768px){
+
+    #introText{
+        font-size:clamp(1.65rem,7vw,2.2rem);
+        min-height:100px;
+    }
+
+    #keyContainer{
+        margin-top:42px;
+    }
+
+    #keyContainer p{
+        font-size:.78rem;
+        letter-spacing:1.5px;
+    }
+
+    #welcomeScreen{
+        padding:32px 22px;
+    }
+
+    .welcome-content h1{
+        font-size:clamp(2.5rem,12vw,3.5rem);
+    }
+
+    .welcome-content h3{
+        font-size:1.7rem;
+    }
+
+    #letterScreen{
+        padding:36px 18px;
+    }
+
+    .letter-assembly{
+        width:min(560px,94vw);
+    }
+
+    #letterContent{
+        top:16%;
+        left:18%;
+        width:64%;
+        font-size:clamp(.72rem,2.85vw,.92rem);
+    }
+
+    #letterContinue{
+        margin-top:14px;
+        padding:9px 19px;
+        font-size:.7rem;
+    }
+
+    .story-timeline{
+        width:min(440px,100%);
+        margin-top:32px;
+    }
+
+    #memoriesScreen{
+        padding:40px 20px;
+    }
+
+    .memory-carousel{
+        grid-template-columns:auto minmax(0,1fr) auto;
+        gap:12px;
+    }
+
+    .memory-viewport{
+        min-height:400px;
+    }
+
+    .memory-image{
+        min-height:245px;
+    }
+
+    #promisesScreen{
+        padding:40px 20px;
+    }
+
+    #reasonsScreen{
+        padding:40px 20px;
+    }
+
+    .reasons-carousel{
+        grid-template-columns:auto minmax(0,1fr) auto;
+        gap:12px;
+    }
+
+    .reason-viewport{
+        min-height:350px;
+    }
+
+    .promise-carousel{
+        grid-template-columns:auto minmax(0,1fr) auto;
+        gap:12px;
+    }
+
+    .promise-viewport{
+        min-height:350px;
+    }
+
+    #finalSurpriseScreen{
+        padding:40px 20px;
+    }
+
+}
+
+@media (max-width: 420px){
+
+    .intro-container{
+        width:min(92%,700px);
+    }
+
+    #introText{
+        min-height:86px;
+    }
+
+    #key{
+        width:112px;
+    }
+
+    .letter-kicker{
+        margin-bottom:12px;
+    }
+
+    #envelopeHint{
+        font-size:.75rem;
+    }
+
+    #letterPaper{
+        bottom:14%;
+    }
+
+    #letterContent{
+        font-size:.72rem;
+        line-height:1.45;
+    }
+
+    #letterSignature{
+        margin-top:7px;
+        font-size:1.2rem;
+    }
+
+    #letterContinue{
+        margin-top:10px;
+        padding:7px 15px;
+        font-size:.62rem;
+    }
+
+    #storyPlaceholder{
+        padding:32px 18px;
+    }
+
+    .story-timeline{
+        gap:10px;
+        margin-top:26px;
+        padding-left:34px;
+    }
+
+    .story-timeline::before{
+        left:10px;
+    }
+
+    .timeline-card{
+        min-height:52px;
+        padding:14px 16px;
+        font-size:.82rem;
+    }
+
+    .timeline-marker{
+        left:-30px;
+        width:11px;
+        height:11px;
+    }
+
+    #memoriesScreen{
+        padding:32px 14px;
+    }
+
+    .memory-carousel{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        margin-top:24px;
+    }
+
+    .memory-viewport{
+        grid-column:1 / -1;
+        grid-row:1;
+        min-height:390px;
+    }
+
+    .memory-arrow{
+        z-index:1;
+        width:42px;
+        height:42px;
+    }
+
+    #memoryPrevious{
+        grid-column:1;
+        grid-row:2;
+        justify-self:start;
+    }
+
+    #memoryNext{
+        grid-column:2;
+        grid-row:2;
+        justify-self:end;
+    }
+
+    .memory-image{
+        min-height:235px;
+    }
+
+    .memory-details{
+        padding:18px 20px 22px;
+    }
+
+    .memory-details p{
+        font-size:.82rem;
+    }
+
+    #promisesScreen{
+        padding:32px 14px;
+    }
+
+    #reasonsScreen{
+        padding:32px 14px;
+    }
+
+    .reasons-carousel{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        margin-top:28px;
+    }
+
+    .reason-viewport{
+        grid-column:1 / -1;
+        grid-row:1;
+        min-height:340px;
+    }
+
+    .reason-arrow{
+        width:42px;
+        height:42px;
+    }
+
+    #reasonPrevious{ grid-column:1; grid-row:2; justify-self:start; }
+    #reasonNext{ grid-column:2; grid-row:2; justify-self:end; }
+    .reason-card{ padding:36px 24px; }
+
+    .promise-carousel{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+        margin-top:28px;
+    }
+
+    .promise-viewport{
+        grid-column:1 / -1;
+        grid-row:1;
+        min-height:340px;
+    }
+
+    .promise-arrow{
+        width:42px;
+        height:42px;
+    }
+
+    #promisePrevious{
+        grid-column:1;
+        grid-row:2;
+        justify-self:start;
+    }
+
+    #promiseNext{
+        grid-column:2;
+        grid-row:2;
+        justify-self:end;
+    }
+
+    .promise-card{
+        padding:36px 24px;
+    }
+
+    #finalSurpriseScreen{
+        padding:32px 18px;
+    }
+
+    .final-message{
+        font-size:.9rem;
+    }
+
+    .last-surprise-panel.is-visible{
+        padding:20px 22px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
+
+}

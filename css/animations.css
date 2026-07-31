@@ -230,13 +230,13 @@
 
 .open-left{
 
-    transform:translateX(-100%);
+    transform:translateX(-104%);
 
 }
 
 .open-right{
 
-    transform:translateX(100%);
+    transform:translateX(104%);
 
 }
 
@@ -322,6 +322,392 @@
         opacity:1;
         transform:translateY(0);
 
+    }
+
+}
+
+/* ===========================
+   CINEMATIC INTRO
+=========================== */
+
+.key-turn{
+
+    animation:keyTurn .8s cubic-bezier(.2,.8,.2,1) forwards;
+
+}
+
+@keyframes keyTurn{
+
+    0%{
+        transform:rotate(0) scale(1);
+    }
+
+    45%{
+        transform:rotate(24deg) scale(1.14);
+    }
+
+    100%{
+        transform:rotate(90deg) scale(.9);
+        opacity:0;
+    }
+
+}
+
+.welcome-reveal{
+
+    animation:welcomeReveal 1s cubic-bezier(.2,.8,.2,1) both;
+
+}
+
+@keyframes welcomeReveal{
+
+    from{
+        opacity:0;
+        transform:translateY(28px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+/* ===========================
+   ROYAL LETTER
+=========================== */
+
+@keyframes sceneEnter{
+
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+@keyframes dustFloat{
+
+    0%,100%{
+        transform:translate3d(0,0,0) scale(.8);
+        opacity:.2;
+    }
+
+    50%{
+        transform:translate3d(18px,-55px,0) scale(1.25);
+        opacity:.85;
+    }
+
+}
+
+@keyframes bloomPulse{
+
+    0%,100%{
+        opacity:.6;
+        transform:translate(-50%,-50%) scale(.92);
+    }
+
+    50%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.08);
+    }
+
+}
+
+@keyframes sealBreak{
+
+    0%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1) rotate(0);
+    }
+
+    38%{
+        transform:translate(-50%,-50%) scale(1.16) rotate(-8deg);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(-50%,-28%) scale(.7) rotate(22deg);
+    }
+
+}
+
+@keyframes envelopeOpen{
+
+    0%{
+        opacity:1;
+        transform:translateY(0) rotateX(0) scale(1);
+    }
+
+    48%{
+        opacity:1;
+        transform:translateY(8%) rotateX(14deg) scale(.99);
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(24%) rotateX(22deg) scale(.94);
+    }
+
+}
+
+@keyframes paperUnfold{
+
+    0%{
+        opacity:0;
+        transform:translateY(34%) scaleY(.48);
+    }
+
+    36%{
+        opacity:1;
+        transform:translateY(5%) scaleY(.62);
+    }
+
+    68%{
+        opacity:1;
+        transform:translateY(-28%) scaleY(.82);
+    }
+
+    100%{
+        opacity:1;
+        transform:translateY(-28%) scaleY(1);
+    }
+
+}
+
+@keyframes cursorBlink{
+
+    50%{
+        opacity:1;
+    }
+
+}
+
+@keyframes storyPlaceholderEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes timelineCardEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(22px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+@keyframes memoriesEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes memoryCardEnter{
+
+    from{
+        opacity:0;
+        transform:scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+@keyframes memoryImageEnter{
+
+    from{
+        opacity:.55;
+        transform:scale(1.06);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+@keyframes memoryCaptionEnter{
+
+    from{
+        transform:translateY(18px);
+    }
+
+    to{
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes memoryContinueGlow{
+
+    0%,100%{
+        box-shadow:0 0 12px rgba(228,190,88,.38);
+    }
+
+    50%{
+        box-shadow:0 0 28px rgba(228,190,88,.8),0 0 48px rgba(228,190,88,.26);
+    }
+
+}
+
+@keyframes promisesEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes promiseCardEnter{
+
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+@keyframes promiseCardGlow{
+
+    0%,100%{
+        box-shadow:0 28px 60px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.12),0 0 12px rgba(230,190,85,.08);
+    }
+
+    50%{
+        box-shadow:0 28px 60px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.12),0 0 30px rgba(230,190,85,.25);
+    }
+
+}
+
+@keyframes reasonsEnter{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes reasonCardEnter{
+    from{ opacity:0; transform:scale(.96); }
+    to{ opacity:1; transform:scale(1); }
+}
+
+@keyframes reasonCardGlow{
+    0%,100%{ box-shadow:0 28px 60px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.14),0 0 12px rgba(255,157,195,.1); }
+    50%{ box-shadow:0 28px 60px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.14),0 0 32px rgba(255,157,195,.3); }
+}
+
+@keyframes reasonContinueGlow{
+    0%,100%{ box-shadow:0 0 12px rgba(255,145,190,.42); }
+    50%{ box-shadow:0 0 28px rgba(255,145,190,.82),0 0 46px rgba(207,120,165,.3); }
+}
+
+@keyframes finalContentEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes finalHeartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    45%{
+        transform:scale(1.1);
+    }
+
+    60%{
+        transform:scale(1.04);
+    }
+
+}
+
+@keyframes finalGlowPulse{
+
+    0%,100%{
+        opacity:.58;
+        transform:translate(-50%,-50%) scale(.94);
+    }
+
+    50%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1.08);
+    }
+
+}
+
+@keyframes finalParticleFloat{
+
+    0%,100%{
+        transform:translate3d(0,0,0) scale(.8);
+        opacity:.2;
+    }
+
+    50%{
+        transform:translate3d(16px,-64px,0) scale(1.2);
+        opacity:.8;
+    }
+
+}
+
+@keyframes finalButtonGlow{
+
+    0%,100%{
+        box-shadow:0 0 12px rgba(255,145,190,.4);
+    }
+
+    50%{
+        box-shadow:0 0 28px rgba(255,145,190,.82),0 0 46px rgba(198,128,230,.3);
     }
 
 }
