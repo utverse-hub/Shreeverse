@@ -106,14 +106,7 @@
 
             <div class="letter-rays" aria-hidden="true"></div>
 
-            <div class="letter-particles" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span>
-            </div>
-
             <div class="letter-scene">
-
-                <p class="letter-kicker">A Letter Just For You</p>
 
                 <div class="letter-assembly" id="letterAssembly">
 
@@ -125,10 +118,17 @@
                         alt="An unfolded letter">
 
                     <div id="letterContent" aria-live="polite">
-                        <p id="typedLetter"></p><span class="typing-cursor" aria-hidden="true">|</span>
-                        <p id="letterSignature">With all my love,<br>❤️</p>
-                        <button id="letterContinue" type="button">Continue</button>
+                        <section id="letterPageOne" class="letter-page is-active" aria-label="Letter page one">
+                            <p id="typedLetterPageOne"></p><span class="typing-cursor" aria-hidden="true">|</span>
+                            <button id="letterNextPage" type="button">Next Page <span aria-hidden="true">→</span></button>
+                        </section>
+                        <section id="letterPageTwo" class="letter-page" aria-label="Letter page two" aria-hidden="true">
+                            <p id="typedLetterPageTwo"></p><span class="typing-cursor" aria-hidden="true">|</span>
+                            <p id="letterSignature">With all my love,<br>Utverse ❤️</p>
+                        </section>
                     </div>
+
+                    <button id="letterSkip" type="button" aria-label="Skip letter typing">Skip Writing ✨</button>
 
                     <button id="envelopeTrigger" type="button" aria-label="Open the royal letter" aria-describedby="envelopeHint">
                         <img
@@ -145,6 +145,8 @@
 
                 </div>
 
+                <button id="letterContinue" type="button">Continue</button>
+
                 <p id="envelopeHint">Click the envelope to open your letter</p>
 
             </div>
@@ -160,36 +162,55 @@
             <div class="story-placeholder-content">
                 <h2 id="storyPlaceholderTitle" tabindex="-1">Our Story</h2>
 
+                <div class="story-divider" aria-hidden="true"><span></span>♥<span></span></div>
+                <p class="story-subtitle">Every love story is beautiful,<br>but <em>ours is my favourite.</em></p>
+
                 <div class="story-timeline" aria-label="Our Story timeline">
 
                     <button class="timeline-card" type="button">
-                        <span class="timeline-marker" aria-hidden="true"></span>
-                        <span>First Meeting</span>
+                        <span class="story-card-badge">Chapter 01</span>
+                        <span class="story-card-icon" aria-hidden="true">✦</span>
+                        <span class="story-card-title">The Beginning</span>
+                        <span class="story-card-copy">It all started with a simple hello.</span>
+                        <span class="story-card-arrow" aria-hidden="true">→</span>
                     </button>
 
                     <button class="timeline-card" type="button">
-                        <span class="timeline-marker" aria-hidden="true"></span>
-                        <span>First Conversation</span>
+                        <span class="story-card-badge">Chapter 02</span>
+                        <span class="story-card-icon" aria-hidden="true">♥</span>
+                        <span class="story-card-title">The First I Love You</span>
+                        <span class="story-card-copy">Three words that changed everything.</span>
+                        <span class="story-card-arrow" aria-hidden="true">→</span>
                     </button>
 
                     <button class="timeline-card" type="button">
-                        <span class="timeline-marker" aria-hidden="true"></span>
-                        <span>First Smile</span>
+                        <span class="story-card-badge">Chapter 03</span>
+                        <span class="story-card-icon" aria-hidden="true">☾</span>
+                        <span class="story-card-title">Late Night Calls</span>
+                        <span class="story-card-copy">Hours that felt like minutes.</span>
+                        <span class="story-card-arrow" aria-hidden="true">→</span>
                     </button>
 
                     <button class="timeline-card" type="button">
-                        <span class="timeline-marker" aria-hidden="true"></span>
-                        <span>First Call</span>
+                        <span class="story-card-badge">Chapter 04</span>
+                        <span class="story-card-icon" aria-hidden="true">♫</span>
+                        <span class="story-card-title">Our Favourite Songs</span>
+                        <span class="story-card-copy">Every song reminds me of you.</span>
+                        <span class="story-card-arrow" aria-hidden="true">→</span>
                     </button>
 
                     <button class="timeline-card" type="button">
-                        <span class="timeline-marker" aria-hidden="true"></span>
-                        <span>First "I Love You"</span>
+                        <span class="story-card-badge">Chapter 05</span>
+                        <span class="story-card-icon" aria-hidden="true">∞</span>
+                        <span class="story-card-title">Forever Starts Here</span>
+                        <span class="story-card-copy">Our story is still being written.</span>
+                        <span class="story-card-arrow" aria-hidden="true">→</span>
                     </button>
 
                 </div>
 
-                <button id="storyContinue" type="button" aria-label="Continue to Our Memories">Continue <span aria-hidden="true">→</span></button>
+                <button id="storyContinue" type="button" aria-label="Continue to Our Memories">Continue to Memories <span aria-hidden="true">→</span></button>
+                <p class="story-footer">This is just the beginning...</p>
             </div>
 
         </section>
@@ -211,32 +232,32 @@
 
                         <article class="memory-card is-active" aria-label="Memory 1 of 6">
                             <div class="memory-image memory-image-one" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
-                            <div class="memory-details"><time datetime="2026-01-01">Placeholder Date</time><h3>First Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                            <div class="memory-details"><time datetime="2026-01-01">The day everything started...</time><h3>The Girl Who Changed My World ❤️</h3><p>Pata nahi kab ek simple si ladki meri poori duniya ban gayi.</p></div>
                         </article>
 
                         <article class="memory-card" aria-label="Memory 2 of 6">
                             <div class="memory-image memory-image-two" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
-                            <div class="memory-details"><time datetime="2026-01-02">Placeholder Date</time><h3>Second Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                            <div class="memory-details"><time datetime="2026-01-02">28 July 2026</time><h3>The First "I Love You" ❤️</h3><p>Teen words... Lekin meri life ka sabse beautiful moment.</p></div>
                         </article>
 
                         <article class="memory-card" aria-label="Memory 3 of 6">
                             <div class="memory-image memory-image-three" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
-                            <div class="memory-details"><time datetime="2026-01-03">Placeholder Date</time><h3>Third Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                            <div class="memory-details"><time datetime="2026-01-03">23 July 2026</time><h3>Hours That Felt Like Minutes 📞</h3><p>Tujhse baat karte waqt time kab nikal jata hai... Pata hi nahi chalta.</p></div>
                         </article>
 
                         <article class="memory-card" aria-label="Memory 4 of 6">
                             <div class="memory-image memory-image-four" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
-                            <div class="memory-details"><time datetime="2026-01-04">Placeholder Date</time><h3>Fourth Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                            <div class="memory-details"><time datetime="2026-01-04">21 July 2026</time><h3>Our Playlist 🎵</h3><p>Ab ye songs sirf songs nahi rahe... Har beat me teri yaad basi hai.</p></div>
                         </article>
 
                         <article class="memory-card" aria-label="Memory 5 of 6">
                             <div class="memory-image memory-image-five" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
-                            <div class="memory-details"><time datetime="2026-01-05">Placeholder Date</time><h3>Fifth Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                            <div class="memory-details"><time datetime="2026-01-05">27 July 2026</time><h3>Our First Kiss 💜</h3><p>Screen ke uss side thi... Lekin uss moment ne dil ki distance hamesha ke liye mita di.</p></div>
                         </article>
 
                         <article class="memory-card" aria-label="Memory 6 of 6">
                             <div class="memory-image memory-image-six" role="img" aria-label="Placeholder memory image"><span>Memory Image</span></div>
-                            <div class="memory-details"><time datetime="2026-01-06">Placeholder Date</time><h3>Sixth Memory</h3><p>A placeholder caption for a memory we will write later.</p></div>
+                            <div class="memory-details"><time datetime="2026-01-06">Happy Girlfriend's Day ❤️</time><h3>This Is Just The Beginning...</h3><p>Abhi toh bas kuch yaadein bani hain... Sabse khoobsurat memories toh abhi hum dono ko saath milkar banani hain.</p></div>
                         </article>
 
                     </div>
@@ -263,16 +284,16 @@
                 <div class="reasons-carousel" aria-roledescription="carousel" aria-label="Reasons I Love You">
                     <button id="reasonPrevious" class="reason-arrow" type="button" aria-label="Previous reason">←</button>
                     <div id="reasonViewport" class="reason-viewport" aria-live="polite">
-                        <article class="reason-card is-active" aria-label="Reason 1 of 10"><span class="reason-number">01</span><h3>First Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 2 of 10"><span class="reason-number">02</span><h3>Second Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 3 of 10"><span class="reason-number">03</span><h3>Third Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 4 of 10"><span class="reason-number">04</span><h3>Fourth Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 5 of 10"><span class="reason-number">05</span><h3>Fifth Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 6 of 10"><span class="reason-number">06</span><h3>Sixth Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 7 of 10"><span class="reason-number">07</span><h3>Seventh Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 8 of 10"><span class="reason-number">08</span><h3>Eighth Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 9 of 10"><span class="reason-number">09</span><h3>Ninth Reason</h3><p>A placeholder reason we will write together later.</p></article>
-                        <article class="reason-card" aria-label="Reason 10 of 10"><span class="reason-number">10</span><h3>Tenth Reason</h3><p>A placeholder reason we will write together later.</p></article>
+                        <article class="reason-card is-active" aria-label="Reason 1 of 10"><span class="reason-number">01</span><h3>First Reason</h3><p>Kyuki tere saath har normal din bhi special ban jata hai.</p></article>
+                        <article class="reason-card" aria-label="Reason 2 of 10"><span class="reason-number">02</span><h3>Second Reason</h3><p>Teri smile dekhte hi mera mood automatically acha ho jata hai.</p></article>
+                        <article class="reason-card" aria-label="Reason 3 of 10"><span class="reason-number">03</span><h3>Third Reason</h3><p>Tu mujhe bina judge kiye accept karti hai, exactly waise hi jaisa main hoon.</p></article>
+                        <article class="reason-card" aria-label="Reason 4 of 10"><span class="reason-number">04</span><h3>Fourth Reason</h3><p>Teri choti-choti care wali baatein mujhe bahut special feel karwati hain.</p></article>
+                        <article class="reason-card" aria-label="Reason 5 of 10"><span class="reason-number">05</span><h3>Fifth Reason</h3><p>Tere saath future imagine karna mujhe sabse zyada pasand hai.</p></article>
+                        <article class="reason-card" aria-label="Reason 6 of 10"><span class="reason-number">06</span><h3>Sixth Reason</h3><p>Teri voice sunte hi saari tension gayab ho jati hai.</p></article>
+                        <article class="reason-card" aria-label="Reason 7 of 10"><span class="reason-number">07</span><h3>Seventh Reason</h3><p>Tu sirf meri girlfriend nahi, meri best friend bhi hai.</p></article>
+                        <article class="reason-card" aria-label="Reason 8 of 10"><span class="reason-number">08</span><h3>Eighth Reason</h3><p>Meri har khushi mein sabse pehla naam tera hi aata hai.</p></article>
+                        <article class="reason-card" aria-label="Reason 9 of 10"><span class="reason-number">09</span><h3>Ninth Reason</h3><p>Tu meri life ka woh hissa hai jiske bina sab kuch adhoora lagta hai.</p></article>
+                        <article class="reason-card" aria-label="Reason 10 of 10"><span class="reason-number">10</span><h3>Tenth Reason</h3><p>Aur sabse badi reason... Main tujhse isliye pyaar karta hoon kyuki tu 'Shree' hai. Kisi aur ki zarurat hi nahi. ❤️</p></article>
                     </div>
                     <button id="reasonNext" class="reason-arrow" type="button" aria-label="Next reason">→</button>
                 </div>
@@ -298,16 +319,16 @@
 
                     <div id="promiseViewport" class="promise-viewport" aria-live="polite">
 
-                        <article class="promise-card is-active" aria-label="Promise 1 of 10"><span class="promise-number">01</span><h3>First Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 2 of 10"><span class="promise-number">02</span><h3>Second Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 3 of 10"><span class="promise-number">03</span><h3>Third Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 4 of 10"><span class="promise-number">04</span><h3>Fourth Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 5 of 10"><span class="promise-number">05</span><h3>Fifth Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 6 of 10"><span class="promise-number">06</span><h3>Sixth Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 7 of 10"><span class="promise-number">07</span><h3>Seventh Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 8 of 10"><span class="promise-number">08</span><h3>Eighth Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 9 of 10"><span class="promise-number">09</span><h3>Ninth Promise</h3><p>A placeholder promise we will write together later.</p></article>
-                        <article class="promise-card" aria-label="Promise 10 of 10"><span class="promise-number">10</span><h3>Tenth Promise</h3><p>A placeholder promise we will write together later.</p></article>
+                        <article class="promise-card is-active" aria-label="Promise 1 of 10"><span class="promise-number">01</span><h3>First Promise</h3><p>Main har situation mein tera saath dunga, chahe kuch bhi ho.</p></article>
+                        <article class="promise-card" aria-label="Promise 2 of 10"><span class="promise-number">02</span><h3>Second Promise</h3><p>Main kabhi tere trust ko break nahi karunga.</p></article>
+                        <article class="promise-card" aria-label="Promise 3 of 10"><span class="promise-number">03</span><h3>Third Promise</h3><p>Jab tujhe kisi ki zarurat hogi, sabse pehle main hi tere saath rahunga.</p></article>
+                        <article class="promise-card" aria-label="Promise 4 of 10"><span class="promise-number">04</span><h3>Fourth Promise</h3><p>Main roz tujhe feel karwaunga ki tu mere liye kitni important hai.</p></article>
+                        <article class="promise-card" aria-label="Promise 5 of 10"><span class="promise-number">05</span><h3>Fifth Promise</h3><p>Main teri smile ki wajah banne ki puri koshish karunga.</p></article>
+                        <article class="promise-card" aria-label="Promise 6 of 10"><span class="promise-number">06</span><h3>Sixth Promise</h3><p>Chahe kitna bhi busy rahu, tere liye time hamesha nikalunga.</p></article>
+                        <article class="promise-card" aria-label="Promise 7 of 10"><span class="promise-number">07</span><h3>Seventh Promise</h3><p>Har problem ko 'meri problem' samajh ke solve karunga.</p></article>
+                        <article class="promise-card" aria-label="Promise 8 of 10"><span class="promise-number">08</span><h3>Eighth Promise</h3><p>Har din tujhse kal se bhi zyada pyaar karunga.</p></article>
+                        <article class="promise-card" aria-label="Promise 9 of 10"><span class="promise-number">09</span><h3>Ninth Promise</h3><p>Kabhi tujhe akela feel nahi hone dunga.</p></article>
+                        <article class="promise-card" aria-label="Promise 10 of 10"><span class="promise-number">10</span><h3>Tenth Promise</h3><p>Aur last promise... Jab tak meri heartbeat chalti rahegi, usme sirf tera hi naam hoga. ❤️</p></article>
 
                     </div>
 
@@ -335,16 +356,76 @@
 
             <div class="final-surprise-content">
                 <div class="final-heart" aria-hidden="true">♥</div>
-                <h2 id="finalSurpriseTitle" tabindex="-1">❤️ Forever &amp; Always ❤️</h2>
-                <p class="final-surprise-subtitle">This is only the beginning of our forever.</p>
-                <p class="final-message">A placeholder final message for a beautiful ending we will write together later.</p>
+                <h2 id="finalSurpriseTitle" tabindex="-1">Forever &amp; Always ❤️</h2>
+                <p class="final-surprise-subtitle">Every ending I wrote for this website reminded me that I never want an ending with you.</p>
+                <p class="final-message">There's one last thing I want to show you...</p>
 
-                <button id="lastSurpriseButton" type="button">One Last Surprise</button>
-
-                <section id="lastSurprisePanel" class="last-surprise-panel" aria-live="polite" aria-hidden="true">
-                    <p>A placeholder surprise message for the final page of our story.</p>
-                </section>
+                <button id="lastSurpriseButton" type="button">Open My Last Surprise ❤️</button>
             </div>
+
+            <div id="finalBlackout" class="final-blackout" aria-hidden="true"></div>
+
+            <section id="finalGiftScene" class="final-gift-scene" aria-hidden="true" aria-label="One last surprise">
+                <div class="gift-spotlight" aria-hidden="true"></div>
+                <div class="gift-dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <button id="giftBox" class="gift-box" type="button" aria-label="Open your last surprise">
+                    <span class="gift-box-base" aria-hidden="true"></span>
+                    <span class="gift-ribbon gift-ribbon-vertical" aria-hidden="true"></span>
+                    <span class="gift-ribbon gift-ribbon-horizontal" aria-hidden="true"></span>
+                    <span class="gift-bow" aria-hidden="true"><i></i><i></i></span>
+                    <span class="gift-lid" aria-hidden="true"><b></b></span>
+                    <span class="gift-light" aria-hidden="true"></span>
+                </button>
+                <p class="gift-scene-title">One Last Surprise...</p>
+                <p class="gift-found-message" aria-live="polite">Achha... mil hi gaya ❤️</p>
+
+                <article id="giftCard" class="gift-card" aria-live="polite">
+                    <div class="gift-card-face gift-card-front">
+                        <p class="gift-card-line gift-card-line-one">I thought...<br><br>What gift could ever be enough<br>for someone<br>who already became my favourite person?</p>
+                        <p class="gift-card-line gift-card-line-two">Then I realised...</p>
+                        <p class="gift-card-line gift-card-line-three">The best gift I could ever give you...<br><br>was every memory we've made together.</p>
+                    </div>
+                    <div class="gift-card-face gift-card-back">
+                        <p>Happy Girlfriend's Day ❤️</p>
+                        <p>I Love You.</p>
+                        <p>Always.</p>
+                        <p>Utverse ❤️</p>
+                    </div>
+                </article>
+
+                <figure id="giftPolaroid" class="gift-polaroid">
+                    <div class="polaroid-photo" role="img" aria-label="A favourite memory together"></div>
+                    <figcaption>❤️ Us<small>Our favourite memory is still being made.</small></figcaption>
+                </figure>
+            </section>
+
+            <section id="cinematicEnding" class="cinematic-ending" aria-hidden="true" aria-label="Our story continues">
+                <canvas id="starCanvas" aria-hidden="true"></canvas>
+                <p id="endingMessage" class="ending-message" aria-live="polite"></p>
+
+                <div id="endingTimeline" class="ending-timeline" aria-hidden="true">
+                    <span>❤️ Today</span>
+                    <span>✨ Next Girlfriend's Day</span>
+                    <span>📸 Countless Memories</span>
+                    <span>♾ Forever</span>
+                    <strong>To Be Continued...</strong>
+                    <small>Because our story is still being written.</small>
+                </div>
+
+                <div id="shootingWish" class="shooting-wish" aria-live="polite">
+                    <i aria-hidden="true"></i><p></p>
+                </div>
+
+                <button id="replayStory" class="replay-story" type="button">Replay Our Story ❤️</button>
+
+                <button id="secretStar" class="secret-star" type="button" aria-label="A little secret">✦</button>
+                <aside id="secretNote" class="secret-note" aria-hidden="true">
+                    <button id="closeSecretNote" type="button" aria-label="Close secret">×</button>
+                    <p>P.S.</p>
+                    <p>I still smile every time your notification appears.</p>
+                    <p>❤️</p>
+                </aside>
+            </section>
 
         </section>
 

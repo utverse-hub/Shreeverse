@@ -391,20 +391,6 @@
 
 }
 
-@keyframes dustFloat{
-
-    0%,100%{
-        transform:translate3d(0,0,0) scale(.8);
-        opacity:.2;
-    }
-
-    50%{
-        transform:translate3d(18px,-55px,0) scale(1.25);
-        opacity:.85;
-    }
-
-}
-
 @keyframes bloomPulse{
 
     0%,100%{
@@ -437,21 +423,62 @@
 
 }
 
-@keyframes envelopeOpen{
+@keyframes envelopeIdle{
+
+    0%,100%{ transform:translateY(0) rotate(-.6deg); }
+    50%{ transform:translateY(-9px) rotate(.6deg); }
+
+}
+
+@keyframes envelopeLift{
+
+    0%{ transform:translateY(0) scale(1); }
+    42%{ transform:translateY(-12px) scale(1.018); }
+    100%{ transform:translateY(-4px) scale(1.005); }
+
+}
+
+@keyframes paperStir{
+
+    0%{ opacity:0; transform:translateY(24%) scaleY(.48); }
+    65%{ opacity:.24; transform:translateY(18%) scaleY(.48); }
+    100%{ opacity:0; transform:translateY(20%) scaleY(.48); }
+
+}
+
+@keyframes envelopeFlapOpen{
 
     0%{
         opacity:1;
         transform:translateY(0) rotateX(0) scale(1);
     }
 
-    48%{
+    52%{
         opacity:1;
-        transform:translateY(8%) rotateX(14deg) scale(.99);
+        transform:translateY(2%) rotateX(16deg) scale(.99);
     }
 
     100%{
+        opacity:1;
+        transform:translateY(11%) rotateX(24deg) scale(.965);
+    }
+
+}
+
+@keyframes paperSlideOut{
+
+    from{
         opacity:0;
-        transform:translateY(24%) rotateX(22deg) scale(.94);
+        transform:translateY(24%) scaleY(.48);
+    }
+
+    18%{
+        opacity:1;
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(-9%) scaleY(.48);
     }
 
 }
@@ -459,23 +486,81 @@
 @keyframes paperUnfold{
 
     0%{
-        opacity:0;
-        transform:translateY(34%) scaleY(.48);
+        opacity:1;
+        transform:translateY(-9%) scaleY(.48);
     }
 
-    36%{
+    34%{
         opacity:1;
-        transform:translateY(5%) scaleY(.62);
+        transform:translateY(-11%) scaleX(.92) scaleY(.68);
     }
 
-    68%{
+    67%{
         opacity:1;
-        transform:translateY(-28%) scaleY(.82);
+        transform:translateY(-9%) scaleX(.98) scaleY(.9);
     }
 
     100%{
         opacity:1;
-        transform:translateY(-28%) scaleY(1);
+        transform:translateY(-8%) scaleY(1);
+    }
+
+}
+
+@keyframes letterStageExpand{
+
+    0%{ transform:scale(1); }
+    100%{ transform:scale(1); }
+
+}
+
+@keyframes paperTextureReveal{
+
+    from{ opacity:0; }
+    to{ opacity:.58; }
+
+}
+
+@keyframes letterVignette{
+
+    from{ opacity:0; }
+    to{ opacity:1; }
+
+}
+
+@keyframes letterCameraFocus{
+
+    from{ opacity:1; transform:scale(1); }
+    to{ opacity:1; transform:scale(1.025); }
+
+}
+
+@keyframes letterContinueGlow{
+
+    0%,100%{ box-shadow:0 8px 20px rgba(183,131,34,.2); }
+    50%{ box-shadow:0 10px 28px rgba(230,190,85,.48),0 0 18px rgba(246,217,127,.18); }
+
+}
+
+@keyframes letterContentReveal{
+
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
+
+}
+
+@keyframes signatureInkReveal{
+
+    from{
+        opacity:0;
+        clip-path:inset(0 100% 0 0);
+        transform:translateY(8px) rotate(-1deg);
+    }
+
+    to{
+        opacity:1;
+        clip-path:inset(0 0 0 0);
+        transform:translateY(0) rotate(0);
     }
 
 }
@@ -506,7 +591,7 @@
 
     from{
         opacity:0;
-        transform:translateY(22px) scale(.97);
+        transform:translateY(20px) scale(.975);
     }
 
     to{
@@ -534,7 +619,21 @@
 
     from{
         opacity:0;
-        transform:scale(.97);
+        transform:translateX(18px) scale(.975);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0) scale(1);
+    }
+
+}
+
+@keyframes memoryImageEnter{
+
+    from{
+        opacity:.45;
+        transform:scale(1.045);
     }
 
     to{
@@ -544,17 +643,17 @@
 
 }
 
-@keyframes memoryImageEnter{
+@keyframes memoryAmbientPulse{
 
-    from{
-        opacity:.55;
-        transform:scale(1.06);
-    }
+    0%,100%{ opacity:.45; }
+    50%{ opacity:.82; }
 
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
+}
+
+@keyframes memoryAmbientDrift{
+
+    0%,100%{ transform:translate3d(-2%,2%,0) scale(.96); opacity:.2; }
+    50%{ transform:translate3d(3%,-3%,0) scale(1.04); opacity:.42; }
 
 }
 
@@ -700,6 +799,34 @@
 
 }
 
+@keyframes finalHeartFloat{
+
+    0%,100%{
+        opacity:.24;
+        transform:translate3d(0,0,0) scale(.85) rotate(-6deg);
+    }
+
+    50%{
+        opacity:.72;
+        transform:translate3d(8px,-18px,0) scale(1.08) rotate(6deg);
+    }
+
+}
+
+@keyframes cardSceneExit{
+
+    from{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    to{
+        opacity:0;
+        transform:scale(1.015);
+    }
+
+}
+
 @keyframes finalButtonGlow{
 
     0%,100%{
@@ -710,4 +837,203 @@
         box-shadow:0 0 28px rgba(255,145,190,.82),0 0 46px rgba(198,128,230,.3);
     }
 
+}
+
+@keyframes letterSimpleExit{
+
+    from{ opacity:1; }
+    to{ opacity:0; }
+
+}
+
+@keyframes letterPageExit{
+
+    0%{
+        opacity:1;
+        transform:translate3d(0,0,0) scale(1);
+        box-shadow:0 0 0 rgba(222,177,76,0);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate3d(-10px,0,0) scale(.992);
+        box-shadow:0 0 18px rgba(222,177,76,.28);
+    }
+
+}
+
+@keyframes letterPageEnter{
+
+    from{
+        opacity:0;
+        transform:translate3d(12px,0,0) scale(.986);
+    }
+
+    to{
+        opacity:1;
+        transform:translate3d(0,0,0) scale(1);
+    }
+
+}
+
+@keyframes signatureFade{
+
+    from{ opacity:0; transform:translateY(5px); }
+    to{ opacity:1; transform:translateY(0); }
+
+}
+
+@keyframes finalGiftHeartbeat{
+    0%,100%{ transform:translateY(0) scale(1); }
+    12%{ transform:translateY(-1px) scale(1.018); }
+    22%{ transform:translateY(0) scale(1); }
+    32%{ transform:translateY(-1px) scale(1.012); }
+    42%{ transform:translateY(0) scale(1); }
+}
+
+@keyframes finalGiftButtonGlow{
+    0%,100%{ box-shadow:0 8px 28px rgba(202,154,57,.2); }
+    50%{ box-shadow:0 8px 30px rgba(228,185,75,.42),0 0 22px rgba(228,185,75,.15); }
+}
+
+@keyframes finalGatewayFade{
+    to{ opacity:0; transform:translateY(-8px) scale(.985); }
+}
+
+@keyframes finalBlackoutHold{
+    0%{ opacity:0; }
+    22%{ opacity:1; }
+    100%{ opacity:1; }
+}
+
+@keyframes finalBlackoutRecede{
+    from{ opacity:1; }
+    to{ opacity:0; visibility:hidden; }
+}
+
+@keyframes giftBoxAppear{
+    from{ opacity:0; transform:scale(.9); }
+    to{ opacity:1; transform:scale(1); }
+}
+
+@keyframes giftBoxBreathe{
+    0%,100%{ transform:translateY(0) scale(1); }
+    50%{ transform:translateY(-5px) scale(1.012); }
+}
+
+@keyframes giftTitleEnter{
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes giftCardRise{
+    from{ opacity:0; transform:translate(-50%,15%) rotate(-2deg) scale(.88); }
+    to{ opacity:1; transform:translate(-50%,-13%) rotate(-2deg) scale(1); }
+}
+
+@keyframes giftCopyReveal{
+    from{ opacity:0; transform:translateY(7px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes giftPolaroidRise{
+    from{ opacity:0; transform:translate(-35%,55%) rotate(7deg) scale(.88); }
+    to{ opacity:1; transform:translate(-35%,38%) rotate(5deg) scale(1); }
+}
+
+@keyframes giftCardFlip{
+    0%{ transform:translate(-50%,-13%) rotate(-2deg) rotateY(0); }
+    50%{ transform:translate(-50%,-13%) rotate(-2deg) rotateY(90deg); }
+    100%{ transform:translate(-50%,-13%) rotate(-2deg) rotateY(180deg); }
+}
+
+@keyframes giftCardBackReveal{
+    to{ opacity:1; }
+}
+
+@keyframes giftSceneFadeToBlack{
+    to{ filter:brightness(0); }
+}
+
+@keyframes endingTimelineDraw{
+    to{ transform:scaleY(1); }
+}
+
+@keyframes endingTimelineItem{
+    to{ opacity:1; transform:translate(0); }
+}
+
+@keyframes shootingStar{
+    0%{ opacity:0; transform:translate3d(-90px,-30px,0) rotate(-24deg) scaleX(.2); }
+    20%{ opacity:1; }
+    100%{ opacity:0; transform:translate3d(250px,90px,0) rotate(-24deg) scaleX(1); }
+}
+
+@keyframes endingWishReveal{
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes secretStarTwinkle{
+    0%,100%{ opacity:.5; text-shadow:0 0 0 transparent; }
+    50%{ opacity:1; text-shadow:0 0 13px #f4d87e; }
+}
+
+@keyframes storyChapterLaunch{
+    0%{ transform:translateY(-7px) scale(1.02); }
+    45%{ transform:translateY(-2px) scale(.985); }
+    100%{ transform:translateY(-5px) scale(1.01); }
+}
+
+@keyframes giftJumpLeft{
+    0%{ transform:translateX(0) scale(1); }
+    42%{ transform:translateX(-38px) translateY(-10px) scale(.94,1.06); }
+    72%{ transform:translateX(-30px) translateY(0) scale(1.04,.96); }
+    100%{ transform:translateX(-26px) scale(1); }
+}
+
+@keyframes giftJumpRight{
+    0%{ transform:translateX(-26px) scale(1); }
+    42%{ transform:translateX(38px) translateY(-10px) scale(.94,1.06); }
+    72%{ transform:translateX(30px) translateY(0) scale(1.04,.96); }
+    100%{ transform:translateX(26px) scale(1); }
+}
+
+@keyframes giftJumpReturn{
+    0%{ transform:translateY(-18px) scale(1); }
+    36%{ transform:translateY(-30px) scale(.96,1.05); }
+    72%{ transform:translateY(-6px) scale(1.04,.96); }
+    100%{ transform:translateY(0) scale(1); }
+}
+
+@keyframes giftJumpUp{
+    0%{ transform:translateX(26px) translateY(0) scale(1); }
+    48%{ transform:translateY(-28px) scale(.95,1.06); }
+    100%{ transform:translateY(-18px) scale(1); }
+}
+
+@keyframes giftFoundMessage{
+    0%{ opacity:0; transform:translate(-50%,8px); }
+    24%,72%{ opacity:1; transform:translate(-50%,0); }
+    100%{ opacity:0; transform:translate(-50%,-5px); }
+}
+
+@keyframes giftPlainBack{
+    0%,90%{ opacity:1; }
+    100%{ opacity:0; }
+}
+
+@keyframes giftTeaseHeartbeat{
+    0%,100%{ transform:scale(1); }
+    32%{ transform:scale(1.025); }
+    48%{ transform:scale(1); }
+}
+
+@keyframes giftTeaseShake{
+    0%,100%{ margin-left:0; }
+    25%{ margin-left:-2px; }
+    75%{ margin-left:2px; }
+}
+
+@keyframes giftRibbonShine{
+    50%{ filter:brightness(1.28); box-shadow:0 0 14px rgba(235,193,84,.7); }
 }

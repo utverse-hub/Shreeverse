@@ -39,7 +39,7 @@
     }
 
     #letterContent{
-        top:16%;
+        top:19%;
         left:18%;
         width:64%;
         font-size:clamp(.72rem,2.85vw,.92rem);
@@ -128,12 +128,12 @@
     }
 
     #letterPaper{
-        bottom:14%;
+        bottom:10%;
     }
 
     #letterContent{
         font-size:.72rem;
-        line-height:1.45;
+        line-height:1.55;
     }
 
     #letterSignature{
@@ -142,7 +142,7 @@
     }
 
     #letterContinue{
-        margin-top:10px;
+        margin-top:20px;
         padding:7px 15px;
         font-size:.62rem;
     }
@@ -293,6 +293,36 @@
         padding:20px 22px;
     }
 
+}
+
+@media (max-width: 768px){
+
+    .story-placeholder-content h2{
+        font-size:clamp(2.25rem,10vw,3.25rem);
+        letter-spacing:.1em;
+    }
+
+    .story-timeline{
+        grid-template-columns:1fr;
+        gap:16px;
+        margin-top:32px;
+        padding:0;
+    }
+
+    .timeline-card:nth-child(n){
+        grid-column:1;
+        min-height:210px;
+        padding:23px 24px;
+    }
+
+    .story-card-title{
+        margin-top:18px;
+    }
+
+    #storyContinue{
+        width:min(100%,280px);
+        margin-top:30px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce){
