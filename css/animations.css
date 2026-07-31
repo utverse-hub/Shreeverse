@@ -1,0 +1,327 @@
+/* ===========================
+   FADE ANIMATIONS
+=========================== */
+
+.fade-in{
+    animation:fadeIn .8s ease forwards;
+}
+
+.fade-out{
+    animation:fadeOut .8s ease forwards;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+@keyframes fadeOut{
+
+    from{
+        opacity:1;
+    }
+
+    to{
+        opacity:0;
+    }
+
+}
+
+/* ===========================
+   SLIDE UP
+=========================== */
+
+.slide-up{
+    animation:slideUp .9s ease forwards;
+}
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================
+   ZOOM
+=========================== */
+
+.zoom-in{
+
+    animation:zoomIn .8s ease forwards;
+
+}
+
+@keyframes zoomIn{
+
+    from{
+
+        opacity:0;
+        transform:scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:scale(1);
+
+    }
+
+}
+
+/* ===========================
+   HEARTBEAT
+=========================== */
+
+.heartbeat{
+
+    animation:heartbeat 1.6s infinite;
+
+}
+
+@keyframes heartbeat{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    20%{
+
+        transform:scale(1.08);
+
+    }
+
+    40%{
+
+        transform:scale(.98);
+
+    }
+
+    60%{
+
+        transform:scale(1.1);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ===========================
+   FLOAT
+=========================== */
+
+.float{
+
+    animation:float 3.5s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================
+   GLOW
+=========================== */
+
+.glow{
+
+    animation:glow 2s infinite;
+
+}
+
+@keyframes glow{
+
+    0%{
+
+        filter:drop-shadow(0 0 4px gold);
+
+    }
+
+    50%{
+
+        filter:drop-shadow(0 0 18px gold);
+
+    }
+
+    100%{
+
+        filter:drop-shadow(0 0 4px gold);
+
+    }
+
+}
+
+/* ===========================
+   BLUR REVEAL
+=========================== */
+
+.blur-reveal{
+
+    animation:blurReveal 1.2s ease forwards;
+
+}
+
+@keyframes blurReveal{
+
+    from{
+
+        opacity:0;
+        filter:blur(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+        filter:blur(0);
+
+    }
+
+}
+
+/* ===========================
+   DOOR OPEN
+=========================== */
+
+.open-left{
+
+    transform:translateX(-100%);
+
+}
+
+.open-right{
+
+    transform:translateX(100%);
+
+}
+
+/* ===========================
+   SPARKLE
+=========================== */
+
+.sparkle{
+
+    animation:sparkle 1.5s infinite;
+
+}
+
+@keyframes sparkle{
+
+    0%{
+
+        opacity:.4;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.4;
+
+    }
+
+}
+
+/* ===========================
+   BUTTON PRESS
+=========================== */
+
+.press{
+
+    animation:press .25s ease;
+
+}
+
+@keyframes press{
+
+    50%{
+
+        transform:scale(.92);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ===========================
+   PAGE TRANSITION
+=========================== */
+
+.page-enter{
+
+    animation:pageEnter .8s ease forwards;
+
+}
+
+@keyframes pageEnter{
+
+    from{
+
+        opacity:0;
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
