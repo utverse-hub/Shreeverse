@@ -2736,7 +2736,7 @@ button:not(:disabled):active{
 .ending-message{
     position:absolute;
     z-index:2;
-    top:50%;
+    top:calc(50% + clamp(140px,15vw,180px));
     left:50%;
     width:min(620px,84vw);
     margin:0;

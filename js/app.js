@@ -104,6 +104,7 @@ let starField = [];
 let starMode = "sky";
 let giftInteractionStep = 0;
 let giftInteractionBusy = false;
+let isLetterCompletionFinalized = false;
 
 const letterPageOneText = "Shree ❤️\n\nHappy Girlfriend's Day.\n\nPata hai... jab main ye letter likhne baitha tha na, tab samajh hi nahi aa raha tha ki shuru kahan se karun. Kyunki jo bhi main feel karta hoon, usse words mein likhna itna easy nahi hota.\n\nBas itna jaanta hoon ki jab se aap meri life mein aaye ho, bahut si cheezein bina bataye hi badal gayi hain.\n\nPehle din bas nikal jaata tha...\n\nAb din tab complete lagta hai jab aapse baat ho jaati hai.\n\nPehle phone uthana bas ek habit thi...\n\nAb har notification dekhte hi sabse pehle ye umeed hoti hai ki shayad aapka message hoga.\n\nAur jab sach mein aapka naam screen par dikhta hai na...\n\nToh bina wajah hi smile aa jaati hai.\n\nAapko shayad kabhi realise bhi na ho...\n\nLekin aapki hasi...\n\nAapki care...\n\nAapka gussa...\n\nAur hamari woh choti choti baatein...\n\nYe sab meri favourite memories ban chuki hain.\n\nThank you...";
 const letterPageTwoText = "Mujhe samajhne ke liye.\n\nMera saath dene ke liye.\n\nMeri choti choti baaton par bhi muskuraane ke liye.\n\nAur sabse zyada...\n\nMeri zindagi ko itna khoobsurat banane ke liye.\n\nMain perfect nahi hoon.\n\nAur shayad kabhi ban bhi na paun.\n\nKabhi hum ladenge...\n\nKabhi misunderstandings bhi hongi...\n\nLekin ek baat ka promise hai...\n\nMain hamesha aapka saath dunga.\n\nChahe waqt kaisa bhi ho.\n\nYe website sirf ek gift nahi hai.\n\nYe meri feelings ka ek chhota sa hissa hai.";
@@ -268,6 +269,8 @@ function typeLetter(page) {
 
     if (page === 2) {
         letterSignature.setAttribute("aria-hidden", "true");
+        letterSignature.style.removeProperty("animation");
+        isLetterCompletionFinalized = false;
     }
 
     letterSkipTimerId = window.setTimeout(() => {
@@ -317,12 +320,47 @@ function beginLetterTyping() {
 
 }
 
-function finishLetterPage(page, skipped = false) {
+function completeLetter(skipped = false) {
 
-    function revealContinue() {
+    if (isLetterCompletionFinalized) {
+        return;
+    }
+
+    const revealContinue = () => {
+        if (isLetterCompletionFinalized) {
+            return;
+        }
+
+        isLetterCompletionFinalized = true;
         letterScreen.classList.add("continue-visible");
         letterContinue.focus();
+    };
+
+    letterAssembly.classList.remove("is-typing");
+    letterAssembly.classList.add("typing-complete");
+    letterSignature.setAttribute("aria-hidden", "false");
+
+    if (skipped) {
+        letterAssembly.classList.add("skip-complete");
+        letterSignature.style.animation = "none";
+        revealContinue();
+        return;
     }
+
+    window.requestAnimationFrame(() => {
+        const signatureAnimations = letterSignature.getAnimations().filter((animation) => animation.playState !== "idle");
+
+        if (signatureAnimations.length === 0) {
+            revealContinue();
+            return;
+        }
+
+        Promise.all(signatureAnimations.map((animation) => animation.finished.catch(() => undefined))).then(revealContinue);
+    });
+
+}
+
+function finishLetterPage(page, skipped = false) {
 
     if (letterSkipTimerId) {
         window.clearTimeout(letterSkipTimerId);
@@ -331,33 +369,19 @@ function finishLetterPage(page, skipped = false) {
 
     letterSkip.classList.remove("is-visible");
 
-    letterAssembly.classList.remove("is-typing");
-
     if (page === 1) {
+        letterAssembly.classList.remove("is-typing");
         letterAssembly.classList.add("page-one-complete");
         letterNextPage.focus();
         return;
     }
 
     if (skipped) {
-        letterAssembly.classList.add("typing-complete", "skip-complete");
-        letterSignature.setAttribute("aria-hidden", "false");
-        window.setTimeout(revealContinue, 300);
+        completeLetter(true);
         return;
     }
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        revealContinue();
-    } else {
-        letterSignature.addEventListener("animationend", (event) => {
-            if (event.target === letterSignature && event.animationName === "signatureInkReveal") {
-                revealContinue();
-            }
-        }, { once:true });
-    }
-
-    letterAssembly.classList.add("typing-complete");
-    letterSignature.setAttribute("aria-hidden", "false");
+    completeLetter();
 
 }
 
@@ -943,8 +967,8 @@ function createTextTargets(width, height, text) {
     const pixels = targetContext.getImageData(0, 0, width, height).data;
     const points = [];
 
-    for (let y = 0; y < height; y += 6) {
-        for (let x = 0; x < width; x += 6) {
+    for (let y = 0; y < height; y += 3) {
+        for (let x = 0; x < width; x += 3) {
             if (pixels[((y * width) + x) * 4 + 3] > 80) {
                 points.push({ x, y });
             }
@@ -955,25 +979,10 @@ function createTextTargets(width, height, text) {
 
 }
 
-function createHeartTargets(width, height) {
-
-    const points = [];
-    const scale = Math.min(width, height) * 0.018;
-
-    for (let t = 0; t < Math.PI * 2; t += 0.036) {
-        const x = 16 * Math.sin(t) ** 3;
-        const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-        points.push({ x:(width / 2) + (x * scale), y:(height / 2) + (y * scale) });
-    }
-
-    return centerStarTargets(points, width, height);
-
-}
-
 function setStarTargets(targets) {
 
     starField.forEach((star, index) => {
-        const target = targets[index % targets.length];
+        const target = targets[Math.floor((index / starField.length) * targets.length)];
         star.targetX = target.x;
         star.targetY = target.y;
     });
@@ -985,7 +994,7 @@ function startStarCanvas() {
     const ratio = resizeStarCanvas();
     const width = starCanvas.width / ratio;
     const height = starCanvas.height / ratio;
-    const count = Math.min(360, Math.max(180, Math.round((width * height) / 5000)));
+    const count = Math.min(900, Math.max(520, Math.round((width * height) / 2200)));
 
     starField = Array.from({ length:count }, () => ({
         x:Math.random() * width,
@@ -1062,13 +1071,6 @@ function startCinematicEnding() {
         const ratio = Math.min(window.devicePixelRatio || 1, 2);
         setStarTargets(createTextTargets(starCanvas.width / ratio, starCanvas.height / ratio, "SHREE ❤️"));
     }, 5000);
-
-    window.setTimeout(() => {
-        starMode = "heart";
-        const ratio = Math.min(window.devicePixelRatio || 1, 2);
-        setStarTargets(createHeartTargets(starCanvas.width / ratio, starCanvas.height / ratio));
-        cinematicEnding.classList.add("heart-formed");
-    }, 15000);
 
     window.setTimeout(() => showEndingMessage("You are my favourite place."), 19000);
     window.setTimeout(() => endingMessage.classList.remove("is-visible"), 22300);
