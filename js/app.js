@@ -54,6 +54,8 @@ const lastSurpriseButton = document.getElementById("lastSurpriseButton");
 const finalBlackout = document.getElementById("finalBlackout");
 const finalGiftScene = document.getElementById("finalGiftScene");
 const giftBox = document.getElementById("giftBox");
+const giftCard = document.getElementById("giftCard");
+const giftPolaroid = document.getElementById("giftPolaroid");
 const cinematicEnding = document.getElementById("cinematicEnding");
 const starCanvas = document.getElementById("starCanvas");
 const endingMessage = document.getElementById("endingMessage");
@@ -105,6 +107,15 @@ let starMode = "sky";
 let giftInteractionStep = 0;
 let giftInteractionBusy = false;
 let isLetterCompletionFinalized = false;
+let hasIntroAudioStarted = false;
+let hasCurtainAudioPlayed = false;
+let hasEnvelopeAudioPlayed = false;
+let hasGiftOpenSoundPlayed = false;
+let hasGiftCardSoundPlayed = false;
+let hasGiftPolaroidSoundPlayed = false;
+let hasStarFormationSoundPlayed = false;
+let hasShootingStarSoundPlayed = false;
+const playedLetterPageSounds = new Set();
 
 const letterPageOneText = "Shree ❤️\n\nHappy Girlfriend's Day.\n\nPata hai... jab main ye letter likhne baitha tha na, tab samajh hi nahi aa raha tha ki shuru kahan se karun. Kyunki jo bhi main feel karta hoon, usse words mein likhna itna easy nahi hota.\n\nBas itna jaanta hoon ki jab se aap meri life mein aaye ho, bahut si cheezein bina bataye hi badal gayi hain.\n\nPehle din bas nikal jaata tha...\n\nAb din tab complete lagta hai jab aapse baat ho jaati hai.\n\nPehle phone uthana bas ek habit thi...\n\nAb har notification dekhte hi sabse pehle ye umeed hoti hai ki shayad aapka message hoga.\n\nAur jab sach mein aapka naam screen par dikhta hai na...\n\nToh bina wajah hi smile aa jaati hai.\n\nAapko shayad kabhi realise bhi na ho...\n\nLekin aapki hasi...\n\nAapki care...\n\nAapka gussa...\n\nAur hamari woh choti choti baatein...\n\nYe sab meri favourite memories ban chuki hain.\n\nThank you...";
 const letterPageTwoText = "Mujhe samajhne ke liye.\n\nMera saath dene ke liye.\n\nMeri choti choti baaton par bhi muskuraane ke liye.\n\nAur sabse zyada...\n\nMeri zindagi ko itna khoobsurat banane ke liye.\n\nMain perfect nahi hoon.\n\nAur shayad kabhi ban bhi na paun.\n\nKabhi hum ladenge...\n\nKabhi misunderstandings bhi hongi...\n\nLekin ek baat ka promise hai...\n\nMain hamesha aapka saath dunga.\n\nChahe waqt kaisa bhi ho.\n\nYe website sirf ek gift nahi hai.\n\nYe meri feelings ka ek chhota sa hissa hai.";
@@ -182,6 +193,24 @@ function revealKey() {
 // KEY CLICK
 // ===============================
 
+function startIntroAudio() {
+
+    if (hasIntroAudioStarted || typeof window.playSound !== "function" || typeof window.fadeInAmbient !== "function") {
+        return;
+    }
+
+    hasIntroAudioStarted = true;
+    window.playSound("intro-impact");
+    window.setTimeout(() => window.playSound("magic-rise"), 300);
+    window.setTimeout(() => {
+        const ambient = window.AudioManager?.sounds?.get("night-ambience");
+        if (!ambient || ambient.paused) {
+            window.fadeInAmbient(2500);
+        }
+    }, 1200);
+
+}
+
 function unlockJourney() {
 
     if (isUnlocking) {
@@ -189,6 +218,7 @@ function unlockJourney() {
     }
 
     isUnlocking = true;
+    startIntroAudio();
     key.setAttribute("aria-disabled", "true");
     keyContainer.style.pointerEvents = "none";
     prologue.classList.add("is-opening");
@@ -212,6 +242,10 @@ function unlockJourney() {
         };
 
         leftDoor.addEventListener("transitionend", finishCurtainReveal);
+        if (!hasCurtainAudioPlayed && typeof window.playSound === "function") {
+            hasCurtainAudioPlayed = true;
+            window.playSound("curtain-open");
+        }
         leftDoor.classList.add("open-left");
         rightDoor.classList.add("open-right");
     }, 320);
@@ -261,6 +295,16 @@ function typeLetter(page) {
     const text = page === 1 ? letterPageOneText : letterPageTwoText;
 
     target.textContent = "";
+    if (!playedLetterPageSounds.has(page) && typeof window.playSound === "function") {
+        playedLetterPageSounds.add(page);
+        window.playSound("page-turn");
+    }
+    if (typeof window.stopSound === "function") {
+        window.stopSound("typewriter");
+    }
+    if (typeof window.playSound === "function") {
+        window.playSound("typewriter");
+    }
     letterAssembly.classList.remove("skip-complete");
     letterAssembly.classList.add("is-typing");
     letterScreen.classList.add("letter-typing");
@@ -368,6 +412,9 @@ function finishLetterPage(page, skipped = false) {
     }
 
     letterSkip.classList.remove("is-visible");
+    if (typeof window.stopSound === "function") {
+        window.stopSound("typewriter");
+    }
 
     if (page === 1) {
         letterAssembly.classList.remove("is-typing");
@@ -443,6 +490,10 @@ function openRoyalLetter() {
     }
 
     isLetterOpening = true;
+    if (!hasEnvelopeAudioPlayed && typeof window.playSound === "function") {
+        hasEnvelopeAudioPlayed = true;
+        window.playSound("paper-open");
+    }
     envelopeTrigger.disabled = true;
     letterAssembly.classList.add("is-opening", "is-seal-breaking");
 
@@ -899,6 +950,7 @@ async function openGiftBox() {
 
     giftInteractionBusy = true;
     giftInteractionStep += 1;
+    window.playSound?.("gift-knock");
     await playGiftFeedback(giftInteractionStep);
 
     if (giftInteractionStep === 4) {
@@ -907,6 +959,10 @@ async function openGiftBox() {
             { filter:"drop-shadow(0 0 30px rgba(235,193,84,.78))" }
         ], { duration:350, fill:"forwards", easing:"ease-in" }));
         animateGiftDust();
+        if (!hasGiftOpenSoundPlayed) {
+            hasGiftOpenSoundPlayed = true;
+            window.playSound?.("gift-open");
+        }
         giftBox.classList.add("is-opening");
         finalGiftScene.classList.add("gift-opened");
         giftBox.disabled = true;
@@ -1068,6 +1124,10 @@ function startCinematicEnding() {
 
     window.setTimeout(() => {
         starMode = "name";
+        if (!hasStarFormationSoundPlayed) {
+            hasStarFormationSoundPlayed = true;
+            window.playSound?.("star-formation");
+        }
         const ratio = Math.min(window.devicePixelRatio || 1, 2);
         setStarTargets(createTextTargets(starCanvas.width / ratio, starCanvas.height / ratio, "SHREE ❤️"));
     }, 5000);
@@ -1084,6 +1144,10 @@ function startCinematicEnding() {
     window.setTimeout(() => {
         shootingWish.classList.add("is-visible");
         shootingWish.querySelector("p").textContent = "Make a wish...";
+        if (!hasShootingStarSoundPlayed) {
+            hasShootingStarSoundPlayed = true;
+            window.playSound?.("shooting-star");
+        }
     }, 37200);
     window.setTimeout(() => {
         shootingWish.querySelector("p").textContent = "I already did.\nAnd it came true.\nIt was you. ❤️";
@@ -1117,8 +1181,14 @@ function hideSecretNote() {
 
 beginJourney.addEventListener("click", showRoyalLetter);
 envelopeTrigger.addEventListener("click", openRoyalLetter);
-letterContinue.addEventListener("click", continueToStoryPlaceholder);
-letterSkip.addEventListener("click", skipLetterTyping);
+letterContinue.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    continueToStoryPlaceholder();
+});
+letterSkip.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    skipLetterTyping();
+});
 letterNextPage.addEventListener("click", showLetterPageTwo);
 
 timelineCards.forEach((card, index) => {
@@ -1135,7 +1205,10 @@ reasonContinue.addEventListener("click", continueToPromises);
 promisePrevious.addEventListener("click", () => showPromise(currentPromiseIndex - 1));
 promiseNext.addEventListener("click", () => showPromise(currentPromiseIndex + 1));
 promiseContinue.addEventListener("click", continueToFinalSurprise);
-lastSurpriseButton.addEventListener("click", revealLastSurprise);
+lastSurpriseButton.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    revealLastSurprise();
+});
 giftBox.addEventListener("click", openGiftBox);
 giftBox.addEventListener("animationend", (event) => {
     if (event.animationName === "giftBoxAppear") {
@@ -1148,7 +1221,22 @@ finalGiftScene.addEventListener("animationend", (event) => {
         window.setTimeout(startCinematicEnding, 2000);
     }
 });
-replayStory.addEventListener("click", replayOurStory);
+giftCard.addEventListener("animationstart", (event) => {
+    if (event.animationName === "giftCardRise" && !hasGiftCardSoundPlayed) {
+        hasGiftCardSoundPlayed = true;
+        window.playSound?.("paper-open");
+    }
+});
+giftPolaroid.addEventListener("animationend", (event) => {
+    if (event.animationName === "giftPolaroidRise" && !hasGiftPolaroidSoundPlayed) {
+        hasGiftPolaroidSoundPlayed = true;
+        window.playSound?.("soft-click");
+    }
+});
+replayStory.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    replayOurStory();
+});
 secretStar.addEventListener("click", showSecretNote);
 closeSecretNote.addEventListener("click", hideSecretNote);
 window.addEventListener("resize", () => {
