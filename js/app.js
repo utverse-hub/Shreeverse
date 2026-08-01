@@ -115,7 +115,6 @@ let hasGiftCardSoundPlayed = false;
 let hasGiftPolaroidSoundPlayed = false;
 let hasStarFormationSoundPlayed = false;
 let hasShootingStarSoundPlayed = false;
-const playedLetterPageSounds = new Set();
 
 const letterPageOneText = "Shree ❤️\n\nHappy Girlfriend's Day.\n\nPata hai... jab main ye letter likhne baitha tha na, tab samajh hi nahi aa raha tha ki shuru kahan se karun. Kyunki jo bhi main feel karta hoon, usse words mein likhna itna easy nahi hota.\n\nBas itna jaanta hoon ki jab se aap meri life mein aaye ho, bahut si cheezein bina bataye hi badal gayi hain.\n\nPehle din bas nikal jaata tha...\n\nAb din tab complete lagta hai jab aapse baat ho jaati hai.\n\nPehle phone uthana bas ek habit thi...\n\nAb har notification dekhte hi sabse pehle ye umeed hoti hai ki shayad aapka message hoga.\n\nAur jab sach mein aapka naam screen par dikhta hai na...\n\nToh bina wajah hi smile aa jaati hai.\n\nAapko shayad kabhi realise bhi na ho...\n\nLekin aapki hasi...\n\nAapki care...\n\nAapka gussa...\n\nAur hamari woh choti choti baatein...\n\nYe sab meri favourite memories ban chuki hain.\n\nThank you...";
 const letterPageTwoText = "Mujhe samajhne ke liye.\n\nMera saath dene ke liye.\n\nMeri choti choti baaton par bhi muskuraane ke liye.\n\nAur sabse zyada...\n\nMeri zindagi ko itna khoobsurat banane ke liye.\n\nMain perfect nahi hoon.\n\nAur shayad kabhi ban bhi na paun.\n\nKabhi hum ladenge...\n\nKabhi misunderstandings bhi hongi...\n\nLekin ek baat ka promise hai...\n\nMain hamesha aapka saath dunga.\n\nChahe waqt kaisa bhi ho.\n\nYe website sirf ek gift nahi hai.\n\nYe meri feelings ka ek chhota sa hissa hai.";
@@ -217,6 +216,7 @@ function unlockJourney() {
         return;
     }
 
+    window.playSound?.("button-click");
     isUnlocking = true;
     startIntroAudio();
     key.setAttribute("aria-disabled", "true");
@@ -295,10 +295,6 @@ function typeLetter(page) {
     const text = page === 1 ? letterPageOneText : letterPageTwoText;
 
     target.textContent = "";
-    if (!playedLetterPageSounds.has(page) && typeof window.playSound === "function") {
-        playedLetterPageSounds.add(page);
-        window.playSound("page-turn");
-    }
     if (typeof window.stopSound === "function") {
         window.stopSound("typewriter");
     }
@@ -360,7 +356,14 @@ function beginLetterTyping() {
     }
 
     isLetterTypingQueued = true;
-    typeLetter(1);
+    startLetterPageTyping(1);
+
+}
+
+function startLetterPageTyping(page) {
+
+    window.playSound?.("page-turn");
+    typeLetter(page);
 
 }
 
@@ -473,7 +476,7 @@ function showLetterPageTwo() {
             if (pageEvent.target === letterPageTwo && pageEvent.animationName === "letterPageEnter") {
                 letterPageTwo.removeEventListener("animationend", finishPageTwoEnter);
                 letterPageTwo.classList.remove("is-entering");
-                typeLetter(2);
+                startLetterPageTyping(2);
             }
         }
 
@@ -490,10 +493,6 @@ function openRoyalLetter() {
     }
 
     isLetterOpening = true;
-    if (!hasEnvelopeAudioPlayed && typeof window.playSound === "function") {
-        hasEnvelopeAudioPlayed = true;
-        window.playSound("paper-open");
-    }
     envelopeTrigger.disabled = true;
     letterAssembly.classList.add("is-opening", "is-seal-breaking");
 
@@ -521,6 +520,10 @@ function openRoyalLetter() {
 
             advanceAfterAnimation(letterPaper, "paperSlideOut", () => {
                 letterAssembly.classList.add("paper-unfolding");
+                if (!hasEnvelopeAudioPlayed) {
+                    hasEnvelopeAudioPlayed = true;
+                    window.playSound?.("paper-open");
+                }
 
                 advanceAfterAnimation(letterPaper, "paperUnfold", () => {
                     letterScreen.classList.add("paper-focus");
@@ -1137,6 +1140,7 @@ function startCinematicEnding() {
     window.setTimeout(() => showEndingMessage("This website has an ending..."), 23000);
     window.setTimeout(() => showEndingMessage("But..."), 25800);
     window.setTimeout(() => showEndingMessage("I hope our story never does."), 28200);
+    window.setTimeout(() => window.playSound?.("whoosh"), 31900);
     window.setTimeout(() => {
         endingMessage.classList.remove("is-visible");
         endingTimeline.classList.add("is-visible");
@@ -1179,8 +1183,14 @@ function hideSecretNote() {
 
 }
 
-beginJourney.addEventListener("click", showRoyalLetter);
-envelopeTrigger.addEventListener("click", openRoyalLetter);
+beginJourney.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showRoyalLetter();
+});
+envelopeTrigger.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    openRoyalLetter();
+});
 letterContinue.addEventListener("click", () => {
     window.playSound?.("button-click");
     continueToStoryPlaceholder();
@@ -1189,22 +1199,58 @@ letterSkip.addEventListener("click", () => {
     window.playSound?.("button-click");
     skipLetterTyping();
 });
-letterNextPage.addEventListener("click", showLetterPageTwo);
-
-timelineCards.forEach((card, index) => {
-    card.addEventListener("click", () => openStoryChapter(index));
+letterNextPage.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showLetterPageTwo();
 });
 
-storyContinue.addEventListener("click", continueToMemories);
-memoryPrevious.addEventListener("click", () => showMemory(currentMemoryIndex - 1));
-memoryNext.addEventListener("click", () => showMemory(currentMemoryIndex + 1));
-memoryContinue.addEventListener("click", continueToReasons);
-reasonPrevious.addEventListener("click", () => showReason(currentReasonIndex - 1));
-reasonNext.addEventListener("click", () => showReason(currentReasonIndex + 1));
-reasonContinue.addEventListener("click", continueToPromises);
-promisePrevious.addEventListener("click", () => showPromise(currentPromiseIndex - 1));
-promiseNext.addEventListener("click", () => showPromise(currentPromiseIndex + 1));
-promiseContinue.addEventListener("click", continueToFinalSurprise);
+timelineCards.forEach((card, index) => {
+    card.addEventListener("click", () => {
+        window.playSound?.("button-click");
+        openStoryChapter(index);
+    });
+});
+
+storyContinue.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    continueToMemories();
+});
+memoryPrevious.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showMemory(currentMemoryIndex - 1);
+});
+memoryNext.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showMemory(currentMemoryIndex + 1);
+});
+memoryContinue.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    continueToReasons();
+});
+reasonPrevious.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showReason(currentReasonIndex - 1);
+});
+reasonNext.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showReason(currentReasonIndex + 1);
+});
+reasonContinue.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    continueToPromises();
+});
+promisePrevious.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showPromise(currentPromiseIndex - 1);
+});
+promiseNext.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showPromise(currentPromiseIndex + 1);
+});
+promiseContinue.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    continueToFinalSurprise();
+});
 lastSurpriseButton.addEventListener("click", () => {
     window.playSound?.("button-click");
     revealLastSurprise();
@@ -1237,8 +1283,14 @@ replayStory.addEventListener("click", () => {
     window.playSound?.("button-click");
     replayOurStory();
 });
-secretStar.addEventListener("click", showSecretNote);
-closeSecretNote.addEventListener("click", hideSecretNote);
+secretStar.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    showSecretNote();
+});
+closeSecretNote.addEventListener("click", () => {
+    window.playSound?.("button-click");
+    hideSecretNote();
+});
 window.addEventListener("resize", () => {
     if (endingHasStarted) {
         startStarCanvas();

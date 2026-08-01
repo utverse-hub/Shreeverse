@@ -2289,6 +2289,18 @@ button:not(:disabled):active{
     transform:translateX(9px) rotate(-14deg);
 }
 
+@media (hover:hover) and (min-width:761px){
+    .timeline-card{
+        transition:transform 250ms cubic-bezier(.22,.61,.36,1),border-color 250ms cubic-bezier(.22,.61,.36,1),box-shadow 250ms cubic-bezier(.22,.61,.36,1);
+    }
+
+    .timeline-card:hover{
+        transform:translateY(-8px) scale(1.03);
+        border-color:rgba(239,207,123,.72);
+        box-shadow:0 26px 58px rgba(0,0,0,.4),0 0 28px rgba(212,175,55,.17),inset 0 1px rgba(255,255,255,.14);
+    }
+}
+
 #storyContinue{
     margin-top:42px;
     padding:14px 32px;
