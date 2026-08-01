@@ -102,7 +102,8 @@ let endingSecretTimer = null;
 let endingHasStarted = false;
 let starField = [];
 let starMode = "sky";
-let giftClickCount = 0;
+let giftInteractionStep = 0;
+let giftInteractionBusy = false;
 
 const letterPageOneText = "Shree ❤️\n\nHappy Girlfriend's Day.\n\nPata hai... jab main ye letter likhne baitha tha na, tab samajh hi nahi aa raha tha ki shuru kahan se karun. Kyunki jo bhi main feel karta hoon, usse words mein likhna itna easy nahi hota.\n\nBas itna jaanta hoon ki jab se aap meri life mein aaye ho, bahut si cheezein bina bataye hi badal gayi hain.\n\nPehle din bas nikal jaata tha...\n\nAb din tab complete lagta hai jab aapse baat ho jaati hai.\n\nPehle phone uthana bas ek habit thi...\n\nAb har notification dekhte hi sabse pehle ye umeed hoti hai ki shayad aapka message hoga.\n\nAur jab sach mein aapka naam screen par dikhta hai na...\n\nToh bina wajah hi smile aa jaati hai.\n\nAapko shayad kabhi realise bhi na ho...\n\nLekin aapki hasi...\n\nAapki care...\n\nAapka gussa...\n\nAur hamari woh choti choti baatein...\n\nYe sab meri favourite memories ban chuki hain.\n\nThank you...";
 const letterPageTwoText = "Mujhe samajhne ke liye.\n\nMera saath dene ke liye.\n\nMeri choti choti baaton par bhi muskuraane ke liye.\n\nAur sabse zyada...\n\nMeri zindagi ko itna khoobsurat banane ke liye.\n\nMain perfect nahi hoon.\n\nAur shayad kabhi ban bhi na paun.\n\nKabhi hum ladenge...\n\nKabhi misunderstandings bhi hongi...\n\nLekin ek baat ka promise hai...\n\nMain hamesha aapka saath dunga.\n\nChahe waqt kaisa bhi ho.\n\nYe website sirf ek gift nahi hai.\n\nYe meri feelings ka ek chhota sa hissa hai.";
@@ -795,32 +796,99 @@ function revealLastSurprise() {
 
 }
 
-function openGiftBox() {
+function waitForGiftMotion(animation) {
+    return animation.finished.catch(() => undefined);
+}
 
-    if (giftBox.disabled || finalGiftScene.classList.contains("gift-opened")) {
-        return;
-    }
+function animateGiftDust() {
 
-    giftClickCount += 1;
-    const playClasses = ["gift-jump-left", "gift-jump-right", "gift-jump-up", "gift-jump-return"];
-    giftBox.classList.remove(...playClasses);
-    void giftBox.offsetWidth;
-    giftBox.classList.add(playClasses[giftClickCount - 1]);
-
-    if (giftClickCount === 4) {
-        giftBox.disabled = true;
-    }
+    finalGiftScene.querySelectorAll(".gift-dust i").forEach((particle, index) => {
+        particle.animate([
+            { opacity:.25, transform:"scale(.8)" },
+            { opacity:1, transform:`scale(${1.35 + ((index % 3) * .12)})` },
+            { opacity:.3, transform:"scale(1)" }
+        ], {
+            duration:640,
+            delay:index * 36,
+            easing:"cubic-bezier(.22,.8,.28,1)"
+        });
+    });
 
 }
 
-function revealGiftSurprise() {
+async function playGiftFeedback(step) {
 
-    finalGiftScene.classList.add("gift-teasing");
-    window.setTimeout(() => {
-        finalGiftScene.classList.remove("gift-teasing");
+    const motion = [
+        [
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 0 rgba(235,193,84,0))" },
+            { transform:"scale(.975,1.025) rotate(-.35deg)", filter:"drop-shadow(0 0 8px rgba(235,193,84,.22))", offset:.34 },
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 0 rgba(235,193,84,0))" }
+        ],
+        [
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 0 rgba(235,193,84,0))" },
+            { transform:"scale(.968,1.032) rotate(-.6deg)", filter:"drop-shadow(0 0 13px rgba(235,193,84,.35))", offset:.25 },
+            { transform:"scale(1.02,.98) rotate(.45deg)", filter:"drop-shadow(0 0 10px rgba(235,193,84,.22))", offset:.58 },
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 0 rgba(235,193,84,0))" }
+        ],
+        [
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 0 rgba(235,193,84,0))" },
+            { transform:"scale(.96,1.04) rotate(-.8deg)", filter:"drop-shadow(0 0 18px rgba(235,193,84,.48))", offset:.2 },
+            { transform:"scale(1.03,.97) rotate(.7deg)", filter:"drop-shadow(0 0 15px rgba(235,193,84,.35))", offset:.54 },
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 0 rgba(235,193,84,0))" }
+        ],
+        [
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 0 rgba(235,193,84,0))" },
+            { transform:"scale(.95,1.05) rotate(-1deg)", filter:"drop-shadow(0 0 24px rgba(235,193,84,.65))", offset:.18 },
+            { transform:"scale(1.04,.96) rotate(.95deg)", filter:"drop-shadow(0 0 28px rgba(235,193,84,.7))", offset:.48 },
+            { transform:"scale(1) rotate(0deg)", filter:"drop-shadow(0 0 20px rgba(235,193,84,.55))" }
+        ]
+    ][step - 1];
+    const duration = [340, 420, 500, 380][step - 1];
+    const vibration = giftBox.animate(motion, { duration, easing:"cubic-bezier(.22,.8,.28,1)" });
+
+    if (step === 2) {
+        giftBox.querySelector(".gift-ribbon-horizontal").animate([
+            { transform:"rotate(0deg) scaleX(1)" },
+            { transform:"rotate(.8deg) scaleX(1.015)" },
+            { transform:"rotate(0deg) scaleX(1)" }
+        ], { duration, easing:"ease-in-out" });
+    }
+
+    if (step === 3) {
+        giftBox.querySelector(".gift-lid").animate([
+            { transform:"rotateX(0deg)", filter:"brightness(1)" },
+            { transform:"rotateX(-5deg)", filter:"brightness(1.08)" },
+            { transform:"rotateX(0deg)", filter:"brightness(1)" }
+        ], { duration, easing:"cubic-bezier(.22,.8,.28,1)" });
+        animateGiftDust();
+    }
+
+    await waitForGiftMotion(vibration);
+
+}
+
+async function openGiftBox() {
+
+    if (giftInteractionBusy || giftInteractionStep >= 4 || finalGiftScene.classList.contains("gift-opened")) {
+        return;
+    }
+
+    giftInteractionBusy = true;
+    giftInteractionStep += 1;
+    await playGiftFeedback(giftInteractionStep);
+
+    if (giftInteractionStep === 4) {
+        await waitForGiftMotion(giftBox.animate([
+            { filter:"drop-shadow(0 0 20px rgba(235,193,84,.55))" },
+            { filter:"drop-shadow(0 0 30px rgba(235,193,84,.78))" }
+        ], { duration:350, fill:"forwards", easing:"ease-in" }));
+        animateGiftDust();
         giftBox.classList.add("is-opening");
         finalGiftScene.classList.add("gift-opened");
-    }, 2000);
+        giftBox.disabled = true;
+    }
+
+    giftInteractionBusy = false;
 
 }
 
@@ -1068,8 +1136,9 @@ promiseContinue.addEventListener("click", continueToFinalSurprise);
 lastSurpriseButton.addEventListener("click", revealLastSurprise);
 giftBox.addEventListener("click", openGiftBox);
 giftBox.addEventListener("animationend", (event) => {
-    if (event.animationName === "giftJumpReturn") {
-        revealGiftSurprise();
+    if (event.animationName === "giftBoxAppear") {
+        giftBox.style.opacity = "1";
+        giftBox.style.visibility = "visible";
     }
 });
 finalGiftScene.addEventListener("animationend", (event) => {

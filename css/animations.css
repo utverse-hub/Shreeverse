@@ -917,8 +917,8 @@
 }
 
 @keyframes giftBoxBreathe{
-    0%,100%{ transform:translateY(0) scale(1); }
-    50%{ transform:translateY(-5px) scale(1.012); }
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.012); }
 }
 
 @keyframes giftTitleEnter{
@@ -939,16 +939,6 @@
 @keyframes giftPolaroidRise{
     from{ opacity:0; transform:translate(-35%,55%) rotate(7deg) scale(.88); }
     to{ opacity:1; transform:translate(-35%,38%) rotate(5deg) scale(1); }
-}
-
-@keyframes giftCardFlip{
-    0%{ transform:translate(-50%,-13%) rotate(-2deg) rotateY(0); }
-    50%{ transform:translate(-50%,-13%) rotate(-2deg) rotateY(90deg); }
-    100%{ transform:translate(-50%,-13%) rotate(-2deg) rotateY(180deg); }
-}
-
-@keyframes giftCardBackReveal{
-    to{ opacity:1; }
 }
 
 @keyframes giftSceneFadeToBlack{
@@ -984,56 +974,12 @@
     100%{ transform:translateY(-5px) scale(1.01); }
 }
 
-@keyframes giftJumpLeft{
-    0%{ transform:translateX(0) scale(1); }
-    42%{ transform:translateX(-38px) translateY(-10px) scale(.94,1.06); }
-    72%{ transform:translateX(-30px) translateY(0) scale(1.04,.96); }
-    100%{ transform:translateX(-26px) scale(1); }
+@keyframes giftCardFrontSlideBack{
+    from{ opacity:1; transform:translateY(0) scale(1); }
+    to{ opacity:0; transform:translateY(14px) scale(.975); }
 }
 
-@keyframes giftJumpRight{
-    0%{ transform:translateX(-26px) scale(1); }
-    42%{ transform:translateX(38px) translateY(-10px) scale(.94,1.06); }
-    72%{ transform:translateX(30px) translateY(0) scale(1.04,.96); }
-    100%{ transform:translateX(26px) scale(1); }
-}
-
-@keyframes giftJumpReturn{
-    0%{ transform:translateY(-18px) scale(1); }
-    36%{ transform:translateY(-30px) scale(.96,1.05); }
-    72%{ transform:translateY(-6px) scale(1.04,.96); }
-    100%{ transform:translateY(0) scale(1); }
-}
-
-@keyframes giftJumpUp{
-    0%{ transform:translateX(26px) translateY(0) scale(1); }
-    48%{ transform:translateY(-28px) scale(.95,1.06); }
-    100%{ transform:translateY(-18px) scale(1); }
-}
-
-@keyframes giftFoundMessage{
-    0%{ opacity:0; transform:translate(-50%,8px); }
-    24%,72%{ opacity:1; transform:translate(-50%,0); }
-    100%{ opacity:0; transform:translate(-50%,-5px); }
-}
-
-@keyframes giftPlainBack{
-    0%,90%{ opacity:1; }
-    100%{ opacity:0; }
-}
-
-@keyframes giftTeaseHeartbeat{
-    0%,100%{ transform:scale(1); }
-    32%{ transform:scale(1.025); }
-    48%{ transform:scale(1); }
-}
-
-@keyframes giftTeaseShake{
-    0%,100%{ margin-left:0; }
-    25%{ margin-left:-2px; }
-    75%{ margin-left:2px; }
-}
-
-@keyframes giftRibbonShine{
-    50%{ filter:brightness(1.28); box-shadow:0 0 14px rgba(235,193,84,.7); }
+@keyframes giftCardBackRise{
+    from{ opacity:0; transform:translateY(18px) scale(.975); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
 }
